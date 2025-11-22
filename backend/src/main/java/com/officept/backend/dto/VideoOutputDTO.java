@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record VideoOutputDTO(
-        ObjectId id,
+        String videoId,
         String name,
         String url,
         List<Muscle> muscles,

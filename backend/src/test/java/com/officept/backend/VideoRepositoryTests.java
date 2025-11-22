@@ -41,8 +41,6 @@ public class VideoRepositoryTests {
         foundVideo = videoRepository.findByUrl("https://samplevideo.com");
         assertThat(foundVideo).isPresent();
         assertThat(foundVideo.get().getName()).isEqualTo("My Sample Video");
-        assertThat(foundVideo.get().getCreatedDate()).isNotNull();
-        assertThat(foundVideo.get().getLastModifiedDate()).isNotNull();
 
         List<Video> foundVideos = videoRepository.findByNameContainsIgnoreCase("my sample video");
         assertThat(foundVideos).isNotEmpty();

@@ -2,7 +2,6 @@ package com.officept.backend.controller;
 
 import com.officept.backend.model.User;
 import com.officept.backend.repository.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public User getUserById(@PathVariable String userId) {
-        return userRepository.findByUserId(userId).orElseThrow();
+        return userRepository.findById(userId).orElseThrow();
     }
 
     @GetMapping("/user")

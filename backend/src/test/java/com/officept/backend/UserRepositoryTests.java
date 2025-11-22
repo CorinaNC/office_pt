@@ -3,9 +3,6 @@ package com.officept.backend;
 import com.officept.backend.config.CustomMongoConfiguration;
 import com.officept.backend.model.User;
 import com.officept.backend.repository.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +38,7 @@ public class UserRepositoryTests {
         Optional<User> foundUser = userRepository.findById("");
         assertThat(foundUser).isNotPresent();
 
-        foundUser = userRepository.findByUserId(user.getUserId());
+        foundUser = userRepository.findById(user.getId());
         assertThat(foundUser).isPresent();
         assertThat(foundUser.get().getFirstName()).isEqualTo("First");
         assertThat(foundUser.get().getLastName()).isEqualTo("Last");

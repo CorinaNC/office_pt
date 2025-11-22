@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
     @MongoId(FieldType.STRING)
-    private String userId = UUID.randomUUID().toString();
+    private String id = UUID.randomUUID().toString();
 
     @Field("first_name")
     private String firstName;

@@ -1,5 +1,6 @@
 package com.officept.backend.controller;
 
+import com.officept.backend.dto.UserInputDTO;
 import com.officept.backend.model.User;
 import com.officept.backend.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,11 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/user/{userId}")
-    public User getUserById(@PathVariable String userId) {
-        return userRepository.findById(userId).orElseThrow();
-    }
-
     @GetMapping("/user")
-    public User getUsersByEmail(@RequestBody String email) {
-        return userRepository.findByEmail(email).orElseThrow();
+    public User getUser(UserInputDTO userInputDTO) {
+        if (userInputDTO.id() == null || userInputDTO.id().isEmpty()) {
+            return userRepository.findByEmail(userInputDTO.email()).orElseThrow();
+        }
+        return userRepository.findById(userInputDTO.id()).orElseThrow();
     }
 }

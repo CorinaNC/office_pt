@@ -13,6 +13,7 @@ import Chat from "./pages/Chat.tsx";
 import LiveWebFeed from "./pages/LiveWebFeed.js";
 import Survey from "./pages/Survey.tsx";
 import Diagram from "./pages/Diagram.tsx";
+import BackButtonWrapper from "./components/BackButtonWrapper.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
@@ -20,13 +21,15 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/videos" element={<Videos />} />
-          <Route path="/camera" element={<LiveWebFeed />} />
-          <Route path="/stretch" element={<Stretch />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/survey" element={<Survey />} />
-          <Route path="/diagram" element={<Diagram />} />
+          <Route path="/" element={<BackButtonWrapper />}>
+            <Route path="/videos" element={<Videos />} />
+            <Route path="/camera" element={<LiveWebFeed />} />
+            <Route path="/stretch" element={<Stretch />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/survey" element={<Survey />} />
+            <Route path="/diagram" element={<Diagram />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

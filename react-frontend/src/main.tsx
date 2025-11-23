@@ -7,6 +7,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./components/theme.ts";
 import Home from "./pages/Home.tsx";
 import Videos from "./pages/Videos.tsx";
+import VideosUlnaris from "./pages/VideosUlnaris.tsx";
+import VideosRadialis from "./pages/VideosRadialis.tsx";
 import Stretch from "./pages/Stretch.tsx";
 import Test from "./pages/Test.tsx";
 import Chat from "./pages/Chat.tsx";
@@ -25,6 +27,8 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/home" element={<Home />} />
             <Route path="/" element={<BackButtonWrapper />}>
               <Route path="/videos" element={<Videos />} />
+              <Route path="/videos/ulnaris" element={<VideosUlnaris />} />
+              <Route path="/videos/radialis" element={<VideosRadialis />} />
               <Route path="/camera" element={<LiveWebFeed />} />
               <Route path="/stretch" element={<Stretch />} />
               <Route path="/test" element={<Test />} />

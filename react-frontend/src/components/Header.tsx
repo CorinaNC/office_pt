@@ -2,20 +2,20 @@
 // import React from "react";
 // import { Outlet } from "react-router-dom";
 
-// const Header = () => {
-//   return (
-//     <Box>
-//       <Box>
-//         <HStack m="1rem">
-//           <Link href="/home">Home</Link>
-//           <Link href="/videos">Video</Link>
-//           <Link href="/camera">Camera</Link>
-//           <Link href="/stretch">Stretch</Link>
-//         </HStack>
-//       </Box>
-//       <Outlet />
-//     </Box>
-//   );
-// };
+const Header = () => {
+  return (
+    <Box>
+      <HStack m="1rem">
+        <Link href="/home">Home</Link>
+        <Link href="/videos">Video</Link>
+        <Link href="/camera">Camera</Link>
+        <Link href="/stretch">Stretch</Link>
+        <Link href="/chat">Chatter</Link> {/* TEMPORARY */}
+        <Link href="/diagram">Diagram</Link>
+      </HStack>
+      <Outlet />
+    </Box>
+  );
+};
 
 // export default Header;

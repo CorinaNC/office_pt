@@ -17,6 +17,7 @@ import Survey from "./pages/Survey.tsx";
 import Diagram from "./pages/Diagram.tsx";
 import BackButtonWrapper from "./components/BackButtonWrapper.tsx";
 import ChatWrapper from "./components/ChatWrapper.tsx";
+import Summary from "./pages/Summary.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
@@ -24,8 +25,8 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<ChatWrapper />}>
             <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/" element={<BackButtonWrapper />}>
+              <Route path="/summary" element={<Summary />} />
               <Route path="/videos" element={<Videos />} />
               <Route path="/videos/ulnaris" element={<VideosUlnaris />} />
               <Route path="/videos/radialis" element={<VideosRadialis />} />

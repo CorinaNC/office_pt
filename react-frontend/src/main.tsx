@@ -8,6 +8,7 @@ import theme from "./components/theme.ts";
 import Home from "./pages/Home.tsx";
 import Videos from "./pages/Videos.tsx";
 import Stretch from "./pages/Stretch.tsx";
+import Chat from "./pages/Chat.tsx";
 import LiveWebFeed from "./pages/LiveWebFeed.js";
 import Survey from "./pages/Survey.tsx";
 import Diagram from "./pages/Diagram.tsx";
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/videos" element={<Videos />} />
             <Route path="/camera" element={<LiveWebFeed />} />
             <Route path="/stretch" element={<Stretch />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/survey" element={<Survey />} />
             <Route path="/diagram" element={<Diagram />} />
           </Route>

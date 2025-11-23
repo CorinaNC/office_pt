@@ -1,12 +1,13 @@
 package com.officept.backend.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Builder(setterPrefix = "with")
 public record UserOutputDTO(
-        String userId,
+        String id,
         String firstName,
         String lastName,
-        String email,
-        LocalDateTime createdDate,
-        LocalDateTime lastModifiedDate
+        String email
 ) {}

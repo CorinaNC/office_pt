@@ -1,5 +1,5 @@
 # Office PT
-## Live preventative care for office workers.[
+## Live preventative care for office workers.
 
 [Grotesque model shows what office workers look like in 40 years...](https://www.dailymail.co.uk/sciencetech/article-15246105/Grotesque-model-average-sedentary-person-2050.html)
 

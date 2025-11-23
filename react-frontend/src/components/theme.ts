@@ -43,6 +43,10 @@ const theme = extendTheme({
         color: "white",
         bg: "black",
 
+      },
+      'select option': {
+        bg: 'white',
+        color: 'black',
       }
     },
   },

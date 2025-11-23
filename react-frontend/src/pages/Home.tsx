@@ -4,6 +4,7 @@ import {
   Heading,
   Image,
   IconButton,
+  Link,
 } from "@chakra-ui/react";
 import Hands from "../assets/main/hands.svg";
 import { HomeIcon, CameraIcon, DiagramIcon } from "../components/CustomIcons";
@@ -32,46 +33,54 @@ const Home = () => {
           Live preventative care for office workers.
         </Heading>
       </VStack>
-      <IconButton
-        colorScheme="black"
-        aria-label="Home"
-        icon={<HomeIcon />}
-        size="xl"
-        isRound
-        position="absolute"
-        top="70%"
-        left="34%"
-      />
-      <IconButton
-        colorScheme="black"
-        aria-label="Camera"
-        icon={<CameraIcon />}
-        size="xl"
-        isRound
-        position="absolute"
-        top="20%"
-        left="43%"
-      />
-      <IconButton
-        colorScheme="black"
-        aria-label="Diagram"
-        icon={<DiagramIcon />}
-        size="xl"
-        isRound
-        position="absolute"
-        top="40%"
-        left="60%"
-      />
-      <IconButton
-        colorScheme="black"
-        aria-label="Chat"
-        icon={<ChatIcon />}
-        size="xl"
-        isRound
-        position="fixed"
-        bottom="2rem"
-        right="2rem"
-      />
+      <Link href="/home">
+        <IconButton
+          colorScheme="black"
+          aria-label="Home"
+          icon={<HomeIcon />}
+          size="xl"
+          isRound
+          position="absolute"
+          top="70%"
+          left="34%"
+        />
+      </Link>
+      <Link href="/camera">
+        <IconButton
+          colorScheme="black"
+          aria-label="Camera"
+          icon={<CameraIcon />}
+          size="xl"
+          isRound
+          position="absolute"
+          top="20%"
+          left="43%"
+        />
+      </Link>
+      <Link href="/diagram">
+        <IconButton
+          colorScheme="black"
+          aria-label="Diagram"
+          icon={<DiagramIcon />}
+          size="xl"
+          isRound
+          position="absolute"
+          top="40%"
+          left="60%"
+        />
+      </Link>
+      <Link href="/chat">
+        <IconButton
+          colorScheme="black"
+          aria-label="Chat"
+          icon={<ChatIcon />}
+          size="xl"
+          isRound
+          position="fixed"
+          bottom="2rem"
+          right="2rem"
+        />
+      </Link>
     </Box>
   );
 };

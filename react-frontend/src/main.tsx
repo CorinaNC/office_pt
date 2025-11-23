@@ -18,17 +18,15 @@ createRoot(document.getElementById("root")!).render(
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Header />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/videos" element={<Videos />} />
-            <Route path="/camera" element={<LiveWebFeed />} />
-            <Route path="/stretch" element={<Stretch />} />
-            <Route path="/test" element={<Test />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/survey" element={<Survey />} />
-            <Route path="/diagram" element={<Diagram />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/videos" element={<Videos />} />
+          <Route path="/camera" element={<LiveWebFeed />} />
+          <Route path="/stretch" element={<Stretch />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/survey" element={<Survey />} />
+          <Route path="/diagram" element={<Diagram />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

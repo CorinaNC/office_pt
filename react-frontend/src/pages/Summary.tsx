@@ -198,71 +198,64 @@ const Summary = () => {
                 )}
               </Stack>
             </CardBody>
-            <CardFooter
-              bg="gray.50"
-              borderTop="1px"
-              mb="1rem"
-              borderColor="gray.100"
-            >
-              <Text fontSize="sm" color="gray.600">
-                Submitted response
-              </Text>
-            </CardFooter>
           </Card>
         ))}
       </SimpleGrid>
 
-      {/* Overall Statistics Card */}
       {surveys.length > 1 && (
         <Card
           mt={8}
           variant="filled"
           alignContent="center"
           display="flex"
+          alignSelf="center"
           bg="blue.50"
         >
           <CardHeader>
             <Heading size="md">Overall Statistics</Heading>
           </CardHeader>
-          <CardBody>
-            <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
-              <Stat>
-                <StatLabel>Total Responses</StatLabel>
-                <StatNumber>{surveys.length}</StatNumber>
-              </Stat>
-              <Stat>
-                <StatLabel>Pain Reports</StatLabel>
-                <StatNumber>
-                  {surveys.filter((s) => s.experiencePain).length}
-                </StatNumber>
-                <StatHelpText>
-                  {(
-                    (surveys.filter((s) => s.experiencePain).length /
-                      surveys.length) *
-                    100
-                  ).toFixed(1)}
-                  %
-                </StatHelpText>
-              </Stat>
-              <Stat>
-                <StatLabel>Most Common Location</StatLabel>
-                <StatNumber fontSize="md">
-                  {(() => {
-                    const locations = surveys
-                      .map((s) => s.painLocation)
-                      .filter(Boolean);
-                    if (locations.length === 0) return "N/A";
-                    const mode = locations.reduce((acc, loc) => {
-                      acc[loc] = (acc[loc] || 0) + 1;
-                      return acc;
-                    }, {});
-                    return Object.keys(mode).reduce((a, b) =>
-                      mode[a] > mode[b] ? a : b
-                    );
-                  })()}
-                </StatNumber>
-              </Stat>
-            </SimpleGrid>
+          <CardBody
+            textAlign="center"
+            display="flex"
+            flexDir="row"
+            alignContent="center"
+          >
+            <Stat>
+              <StatLabel>Total Responses</StatLabel>
+              <StatNumber>{surveys.length}</StatNumber>
+            </Stat>
+            <Stat>
+              <StatLabel>Pain Reports</StatLabel>
+              <StatNumber>
+                {surveys.filter((s) => s.experiencePain).length}
+              </StatNumber>
+              <StatHelpText>
+                {(
+                  (surveys.filter((s) => s.experiencePain).length /
+                    surveys.length) *
+                  100
+                ).toFixed(1)}
+                %
+              </StatHelpText>
+            </Stat>
+            <Stat>
+              <StatLabel>Most Common Location</StatLabel>
+              <StatNumber fontSize="md">
+                {(() => {
+                  const locations = surveys
+                    .map((s) => s.painLocation)
+                    .filter(Boolean);
+                  if (locations.length === 0) return "N/A";
+                  const mode = locations.reduce((acc, loc) => {
+                    acc[loc] = (acc[loc] || 0) + 1;
+                    return acc;
+                  }, {});
+                  return Object.keys(mode).reduce((a, b) =>
+                    mode[a] > mode[b] ? a : b
+                  );
+                })()}
+              </StatNumber>
+            </Stat>
           </CardBody>
         </Card>
       )}

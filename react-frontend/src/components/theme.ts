@@ -19,6 +19,15 @@ const theme = extendTheme({
         bg: "#00CCBE",
         color: "white",
       },
+      html: {
+        height: "100vh",
+        weight: "100vw",
+      },
+      button: {
+        color: "white",
+        bg: "black",
+
+      }
     },
   },
 });

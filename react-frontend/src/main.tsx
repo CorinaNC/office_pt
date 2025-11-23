@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import Header from "./components/Header.tsx";
+// import Header from "./components/Header.tsx";
 import theme from "./components/theme.ts";
 import Home from "./pages/Home.tsx";
 import Videos from "./pages/Videos.tsx";
@@ -15,13 +15,13 @@ createRoot(document.getElementById("root")!).render(
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Header />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/videos" element={<Videos />} />
-            <Route path="/camera" element={<Camera />} />
-            <Route path="/stretch" element={<Stretch />} />
-          </Route>
+          {/* <Route path="/" element={<Header />}> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/videos" element={<Videos />} />
+          <Route path="/camera" element={<Camera />} />
+          <Route path="/stretch" element={<Stretch />} />
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

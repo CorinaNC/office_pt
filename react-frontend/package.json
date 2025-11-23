@@ -19,6 +19,7 @@
     "@mediapipe/face_mesh": "^0.4.1633559619",
     "@mediapipe/pose": "^0.5.1675469404",
     "@tensorflow/tfjs": "^4.22.0",
+    "axios": "^1.13.2",
     "framer-motion": "^12.23.24",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

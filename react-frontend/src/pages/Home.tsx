@@ -33,10 +33,10 @@ const Home = () => {
           Live preventative care for office workers.
         </Heading>
       </VStack>
-      <Link href="/home">
+      <Link href="/summary">
         <IconButton
           colorScheme="black"
-          aria-label="Home"
+          aria-label="Summary"
           icon={<HomeIcon />}
           size="xl"
           isRound

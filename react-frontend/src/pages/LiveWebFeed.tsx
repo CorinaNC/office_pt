@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import { Pose, Results, POSE_CONNECTIONS } from "@mediapipe/pose";
 import { Camera } from "@mediapipe/camera_utils";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, HStack, Link } from "@chakra-ui/react";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 
 const postureTimer = 10000;
@@ -46,7 +46,7 @@ const LiveWebFeed = () => {
       }
     }
   }, []);
-
+  const handleSessionEnd = () => {};
   const showBadPostureNotification = useCallback(() => {
     if (!("Notification" in window)) {
       console.warn("This browser does not support notifications");
@@ -67,7 +67,6 @@ const LiveWebFeed = () => {
 
     const notification = new Notification("SIT UP STRAIGHT !", {
       body: "You've had bad posture for more than 10 seconds. Please adjust your position!",
-      icon: "/favicon.ico",
       tag: "posture-alert",
       requireInteraction: true,
     });
@@ -178,7 +177,11 @@ const LiveWebFeed = () => {
               );
               if (timeLeft > 0) {
                 canvasCtx.fillText(`${feedback}`, 10, 30);
-                canvasCtx.fillText(`(Please sit up straight or you may be alerted!)`, 10, 50);
+                canvasCtx.fillText(
+                  `(Please sit up straight or you may be alerted!)`,
+                  10,
+                  50
+                );
               } else {
                 canvasCtx.fillText(`${feedback} (ALERT ACTIVE!)`, 10, 30);
               }
@@ -349,19 +352,25 @@ const LiveWebFeed = () => {
             transform: "scaleX(-1)",
             maxWidth: "100%",
             height: "auto",
-            borderRadius: "1rem"
+            borderRadius: "1rem",
           }}
         />
       </Box>
-      <Button
-        colorScheme={goodPosture ? "green" : "blue"}
-        onClick={calibratePosture}
-        isLoading={isCalibrating}
-        loadingText="Calibrating..."
-        zIndex={10}
-      >
-        {goodPosture ? "Recalibrate Posture" : "Calibrate Posture"}
-      </Button>
+      <HStack>
+        <Button
+          colorScheme={goodPosture ? "green" : "blue"}
+          onClick={calibratePosture}
+          isLoading={isCalibrating}
+          loadingText="Calibrating..."
+          zIndex={10}
+        >
+          {goodPosture ? "Recalibrate Posture" : "Calibrate Posture"}
+        </Button>
+        <Button colorScheme="red">
+          <Link href="/survey">End Session</Link>
+        </Button>
+      </HStack>
+
       {notificationPermission !== "granted" && (
         <Button
           colorScheme="orange"

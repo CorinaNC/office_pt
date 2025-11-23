@@ -6,5 +6,5 @@ import lombok.Builder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(setterPrefix = "with")
 public record FlaskInputDTO(
-        String agentReply
+        String reply
 ) {}

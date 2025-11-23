@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class ChatService {
@@ -55,11 +57,11 @@ public class ChatService {
         // 4. Call Flask
         FlaskInputDTO flaskPostRequest = restTemplate.postForObject(
                 FLASK_URL,
-                new com.officept.backend.dto.ChatInputDTO(null, null, dto.userMessage()),
+                Map.of("message", dto.userMessage()),
                 FlaskInputDTO.class
         );
 
-        String agentReply = flaskPostRequest != null ? flaskPostRequest.agentReply() : "";
+        String agentReply = flaskPostRequest != null ? flaskPostRequest.reply() : "";
 
         // 5. Save reply chat (system/bot user can be null or a special user)
         Chat replyChat = Chat.builder()

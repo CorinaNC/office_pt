@@ -1,4 +1,19 @@
 import { extendTheme } from "@chakra-ui/react";
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
+
+const xl = defineStyle({
+  h: "28",        // overall button height
+  w: "28",        // overall button width
+  fontSize: "6xl",
+  px: 0,
+  borderRadius: "full"
+});
+
+const Button = defineStyleConfig({
+  sizes: {
+    xl,
+  },
+});
 
 const theme = extendTheme({
   fonts: {
@@ -12,6 +27,7 @@ const theme = extendTheme({
         fontWeight: 700,
       },
     },
+    Button,
   },
   styles: {
     global: {
@@ -19,6 +35,15 @@ const theme = extendTheme({
         bg: "#00CCBE",
         color: "white",
       },
+      html: {
+        height: "100vh",
+        weight: "100vw",
+      },
+      button: {
+        color: "white",
+        bg: "black",
+
+      }
     },
   },
 });

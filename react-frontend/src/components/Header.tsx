@@ -1,6 +1,6 @@
-import { HStack, Box, Link } from "@chakra-ui/react";
-import React from "react";
-import { Outlet } from "react-router-dom";
+// import { HStack, Box, Link } from "@chakra-ui/react";
+// import React from "react";
+// import { Outlet } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -18,4 +18,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+// export default Header;

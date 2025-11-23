@@ -68,29 +68,6 @@ const Summary = () => {
       </Box>
     );
   }
-
-  if (error) {
-    return (
-      <Alert
-        status="error"
-        variant="subtle"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        textAlign="center"
-        minH="200px"
-      >
-        <AlertIcon boxSize="40px" mr={0} />
-        <AlertTitle mt={4} mb={1} fontSize="lg">
-          Error Loading Data
-        </AlertTitle>
-        <AlertDescription maxWidth="sm">
-          {error}. Please check if the server is running.
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
   if (!data || data.length === 0) {
     return (
       <Alert

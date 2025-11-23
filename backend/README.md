@@ -1,3 +1,5 @@
+**Please make sure to connect your own MongoDB URI inside of secrets.properties so the bakcend/ can run!**
+
 ```aiignore
 mvn clean install
 mvn clean install -DskipTests

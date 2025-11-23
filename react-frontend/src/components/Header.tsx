@@ -10,6 +10,7 @@ const Header = () => {
         <Link href="/videos">Video</Link>
         <Link href="/camera">Camera</Link>
         <Link href="/stretch">Stretch</Link>
+        <Link href="/diagram">Diagram</Link>
       </HStack>
       <Outlet />
     </Box>

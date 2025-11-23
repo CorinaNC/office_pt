@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.officept.backend.record.Muscle;
 import lombok.Builder;
 
-import java.util.List;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(setterPrefix = "with")
@@ -12,5 +12,10 @@ public record ExerciseOutputDTO(
         String id,
         String name,
         String url,
-        List<Muscle> muscles
+        String description,
+        String note,
+        Set<Muscle> muscles,
+        int numSet,
+        RangeDTO repetition,
+        RangeDTO sessionPerDay
 ) {}

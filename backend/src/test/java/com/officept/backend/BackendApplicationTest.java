@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 @DataMongoTest
 @Import(CustomMongoConfiguration.class)
 @ActiveProfiles("test")
-class BackendApplicationTests {
+class BackendApplicationTest {
 
 	@Test
 	void contextLoads() {

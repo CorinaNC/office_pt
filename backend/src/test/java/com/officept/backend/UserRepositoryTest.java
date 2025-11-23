@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataMongoTest
 @Import(CustomMongoConfiguration.class)
 @ActiveProfiles("test")
-public class UserRepositoryTests {
+public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 

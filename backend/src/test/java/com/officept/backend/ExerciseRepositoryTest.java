@@ -18,13 +18,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataMongoTest
 @Import(CustomMongoConfiguration.class)
 @ActiveProfiles("test")
-public class ExerciseRepositoryTests {
+public class ExerciseRepositoryTest {
     @Autowired
     private ExerciseRepository exerciseRepository;
 
     @BeforeEach
     void beforeEach() {
         exerciseRepository.deleteAll();
+    }
+
+    @Test
+    void testFindById() {
+        Exercise exercise = Exercise.builder()
+                .setName("My Sample Exercise")
+                .setUrl("https://samplevideo.com")
+                .build();
+        exerciseRepository.save(exercise);
+
+        Optional<Exercise> foundExercise = exerciseRepository.findById("");
+        assertThat(foundExercise).isNotPresent();
+
+        foundExercise = exerciseRepository.findById(exercise.getId());
+        assertThat(foundExercise).isPresent();
+        assertThat(foundExercise.get().getName()).isEqualTo("My Sample Exercise");
+
+        List<Exercise> foundExercises = exerciseRepository.findByNameContainsIgnoreCase("my sample exercise");
+        assertThat(foundExercises).isNotEmpty();
+        assertThat(foundExercises.size()).isEqualTo(1);
+        assertThat(foundExercises.getFirst().getName()).isEqualTo("My Sample Exercise");
+        assertThat(foundExercises.getFirst().getUrl()).isEqualTo("https://samplevideo.com");
     }
 
     @Test

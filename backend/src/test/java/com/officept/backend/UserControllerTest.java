@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -37,12 +38,12 @@ class UserControllerTest {
 
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value(user1.getFirstName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value(user1.getLastName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value(user1.getEmail()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].firstName").value(user2.getFirstName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].lastName").value(user2.getLastName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].email").value(user2.getEmail()));
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
+                .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()))
+                .andExpect(jsonPath("$[1].firstName").value(user2.getFirstName()))
+                .andExpect(jsonPath("$[1].lastName").value(user2.getLastName()))
+                .andExpect(jsonPath("$[1].email").value(user2.getEmail()));
     }
 }

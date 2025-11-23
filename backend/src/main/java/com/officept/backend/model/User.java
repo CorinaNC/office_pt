@@ -13,11 +13,12 @@ import java.util.UUID;
 
 @Data
 @Builder(setterPrefix = "set")
-@Document(collection = "users")
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "users")
 public class User {
     @MongoId(FieldType.STRING)
+    @Builder.Default
     private String id = UUID.randomUUID().toString();
 
     @Field("first_name")

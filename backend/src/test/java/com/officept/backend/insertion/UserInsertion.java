@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 @DataMongoTest
 @Import(CustomMongoConfiguration.class)
 @ActiveProfiles("test")  // Comment out to use main database
-public class UserRepositoryInsertion {
+public class UserInsertion {
     @Autowired
     private UserRepository userRepository;
 

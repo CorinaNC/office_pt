@@ -14,7 +14,7 @@ const mainBrowser = () => {
     width: 800,
     height: 600,
     title: "OfficePT",
-
+    icon: path.join(__dirname, "assets/logo.png")
   });
 
   mainWindow.webContents.openDevTools();

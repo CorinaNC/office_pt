@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(setterPrefix = "with")
-public record VideoInputDTO(
+public record ExerciseInputDTO(
         String id,
         String name,
         String url

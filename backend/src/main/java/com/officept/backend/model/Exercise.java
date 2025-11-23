@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @Data
 @Builder(setterPrefix = "set")
-@Document(collection = "videos")
-public class Video {
+@Document(collection = "exercises")
+public class Exercise {
     @Id
     private String id = UUID.randomUUID().toString();
 

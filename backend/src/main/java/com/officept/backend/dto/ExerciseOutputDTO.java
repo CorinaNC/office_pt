@@ -8,7 +8,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(setterPrefix = "with")
-public record VideoOutputDTO(
+public record ExerciseOutputDTO(
         String id,
         String name,
         String url,

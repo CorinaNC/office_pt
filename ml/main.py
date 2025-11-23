@@ -16,7 +16,7 @@ if not API_KEY:
     )
 
 
-def call_chat_api(input_text):
+def generate_reply(input_text):
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
@@ -39,7 +39,7 @@ def call_chat_api(input_text):
     return response.json()
 
 
-def get_text(response):
+def get_reply_only(response):
     try:
         choices = response.get("choices", [])
         if not choices:
@@ -57,14 +57,28 @@ def get_text(response):
         return None
 
 
-@app.route("/chatter")
+@app.route("/chatter", methods=["POST"])
 def chatter():
-    # accept query param ?q=... to pass custom prompt, otherwise use default
-    user_input = request.args.get("q", message)
-    api_resp = call_chat_api(user_input)
-    text = get_text(api_resp) or "No response from API"
-    return jsonify({"text": text})
+    try:
+        data = request.get_json(force=True, silent=False)
+        # data = request.json()
+    except:
+        return jsonify({"error": "Invalid JSON"}), 400
 
+    if not data or "message" not in data:
+        return jsonify({"error": "Field 'message' is required"}), 400
+
+    user_message = data["message"]
+    if not isinstance(user_message, str) or not user_message.strip():
+        return jsonify({"error": "Field 'message' must be a non-empty string"}), 400
+
+    try:
+        reply = generate_reply(user_message)
+    except Exception as e:
+
+        return jsonify({"error": "LLM generation failed"}), 500
+
+    return jsonify({"reply": get_reply_only(reply)}), 200
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

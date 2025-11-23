@@ -7,7 +7,7 @@ import lombok.Builder;
 @Builder(setterPrefix = "with")
 public record ChatOutputDTO(
         String conversationId,
-        UserInputDTO user,
+        UserOutputDTO user,
         String userMessage,
         String agentReply
 ) {}

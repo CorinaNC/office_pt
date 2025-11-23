@@ -40,14 +40,8 @@
                             .withNote(e.getNote())
                             .withMuscles(e.getMuscles())
                             .withNumSet(e.getNumSet())
-                            .withRepetition(RangeDTO.builder()
-                                    .withMin(e.getRepetition().getMin())
-                                    .withMax(e.getRepetition().getMax())
-                                    .build())
-                            .withSessionPerDay(RangeDTO.builder()
-                                    .withMin(e.getSessionPerDay().getMin())
-                                    .withMax(e.getSessionPerDay().getMax())
-                                    .build())
+                            .withRepetition(RangeDTO.from(e.getRepetition()))
+                            .withSessionPerDay(RangeDTO.from(e.getSessionPerDay()))
                             .build())
                     .toList();
         }

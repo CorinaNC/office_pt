@@ -1,3 +1,18 @@
+# Office PT
+## Live preventative care for office workers.[
+
+Grotesque model shows what office workers look like in 40 years...](https://www.dailymail.co.uk/sciencetech/article-15246105/Grotesque-model-average-sedentary-person-2050.html)
+
+The average office worker lifecycle without a physical therapist is not a good look for anybody, especially software engineers.  Office PT is here to help.  With a live posture checker and numerous QOL tools to help log your activity and nurture your PT knowledge, Office PT attempts to fix the inconvenience of working in an office with a lightweight and unintrusive Desktop application to make sure your back doesn't end up looking like [that guy's...](https://i.dailymail.co.uk/1s/2025/10/31/15/103485011-15246105-To_highlight_the_dangers_of_a_sedentary_lifestyle_experts_create-m-41_1761925125672.jpg)
+
+DEPLOYMENT INFO IN EACH SERVICE'S FOLDER!!! (We did not deploy this onto a cloud because Docker is hard :()
+
+## Team Members
+- Corina Conklin - https://www.corinanc.site/
+- Serena Xin - https://ajisairen.github.io/
+- Chau Truong - https://chaunmt.com/ 
+- Lindsey Oh - ohlindsey1@gmail.com
+
 ## Inspiration
 The largest inspiration for Office PT is from one of our member's personal experiences with Repetitive Strain Injury (RSI).  When she was first diagnosed with tendonitis, it was difficult to find resources on educating, treating, and living with the condition.  She came to the realization that our society in general is incredibly reliant on computers and unfortunately ergonomic options or access to a physical therapist can be expensive and sometimes completely unavailable.  Office PT attempts to address these issues being a free/open source posture tracker alongside a physical therapy handbook, particularly marketed towards those who are at "higher-risk" for RSI conditions, i.e. office workers.  The app has quite a few moving parts, aiming to cover as many bases as possible to be a "catch-all" solution for RSI risk factors.  We also wanted to make sure that the app would not interrupt workflow as one of the biggest hurdles with treating RSI is sticking to consistent stretches and exercises.
 

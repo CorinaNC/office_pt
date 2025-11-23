@@ -6,5 +6,5 @@ import lombok.Builder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(setterPrefix = "with")
 public record FlaskOutputDTO(
-        String userMessage
+        String message
 ) {}

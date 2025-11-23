@@ -3,6 +3,7 @@ package com.officept.backend.service;
 import com.officept.backend.dto.ChatInputDTO;
 import com.officept.backend.dto.ChatOutputDTO;
 import com.officept.backend.dto.FlaskInputDTO;
+import com.officept.backend.dto.FlaskOutputDTO;
 import com.officept.backend.model.Chat;
 import com.officept.backend.model.Conversation;
 import com.officept.backend.model.User;
@@ -13,8 +14,6 @@ import com.officept.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +56,7 @@ public class ChatService {
         // 4. Call Flask
         FlaskInputDTO flaskPostRequest = restTemplate.postForObject(
                 FLASK_URL,
-                Map.of("message", dto.userMessage()),
+                FlaskOutputDTO.builder().withMessage(dto.userMessage()).build(),
                 FlaskInputDTO.class
         );
 

@@ -1,7 +1,7 @@
 # Office PT
 ## Live preventative care for office workers.[
 
-Grotesque model shows what office workers look like in 40 years...](https://www.dailymail.co.uk/sciencetech/article-15246105/Grotesque-model-average-sedentary-person-2050.html)
+[Grotesque model shows what office workers look like in 40 years...](https://www.dailymail.co.uk/sciencetech/article-15246105/Grotesque-model-average-sedentary-person-2050.html)
 
 The average office worker lifecycle without a physical therapist is not a good look for anybody, especially software engineers.  Office PT is here to help.  With a live posture checker and numerous QOL tools to help log your activity and nurture your PT knowledge, Office PT attempts to fix the inconvenience of working in an office with a lightweight and unintrusive Desktop application to make sure your back doesn't end up looking like [that guy's...](https://i.dailymail.co.uk/1s/2025/10/31/15/103485011-15246105-To_highlight_the_dangers_of_a_sedentary_lifestyle_experts_create-m-41_1761925125672.jpg)
 

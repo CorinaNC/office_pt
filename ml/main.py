@@ -29,7 +29,7 @@ def generate_reply(input_text):
                 "messages": [
                     {
                         "role": "user",
-                        "content": f"User Input: {input_text}. Keep it short.",
+                        "content": f"Please be concise and succinct while still conveying enough meaning to be understandable and readable. Be sure to only answer questions pertaining to medical-related issues. If the user input is not related to something medical, say 'Invalid input. I can only help with medical-related questions.' Do not entertain hypotheticals. Target physical therapy related questions and be informative about solutions to relieving pain. If using medical terminology, make sure to explain it in a way a person without a medical background can understand. The purpose of being able to ask about these questions is so that users can be more informed about what they can do to reduce the likelihood of developing repetitive strain injuries, so being well-researched about it is very important. Here is the user input for you to respond to: {input_text}.",
                     }
                 ],
             }

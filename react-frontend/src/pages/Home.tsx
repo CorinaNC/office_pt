@@ -69,18 +69,7 @@ const Home = () => {
           left="60%"
         />
       </Link>
-      <Link href="/chat">
-        <IconButton
-          colorScheme="black"
-          aria-label="Chat"
-          icon={<ChatIcon />}
-          size="xl"
-          isRound
-          position="fixed"
-          bottom="2rem"
-          right="2rem"
-        />
-      </Link>
+      
     </Box>
   );
 };

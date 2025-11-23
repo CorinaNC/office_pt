@@ -5,6 +5,8 @@ import { Camera } from "@mediapipe/camera_utils";
 import { Box, Button } from "@chakra-ui/react";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 
+const postureTimer = 10000;
+
 interface Landmark {
   x: number;
   y: number;
@@ -21,10 +23,75 @@ interface PostureData {
 const LiveWebFeed = () => {
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(0);
   const [, setLoaded] = useState(false);
   const [goodPosture, setGoodPosture] = useState<PostureData | null>(null);
   const [isCalibrating, setIsCalibrating] = useState(false);
+  const [badPostureStartTime, setBadPostureStartTime] = useState<number | null>(
+    null
+  );
+  const [isBadPosture, setIsBadPosture] = useState(false);
+  const [notificationPermission, setNotificationPermission] =
+    useState<NotificationPermission>("default");
+
+  // Request notification permission on component mount
+  useEffect(() => {
+    if ("Notification" in window) {
+      setNotificationPermission(Notification.permission);
+
+      if (Notification.permission === "default") {
+        Notification.requestPermission().then((permission) => {
+          setNotificationPermission(permission);
+        });
+      }
+    }
+  }, []);
+
+  const showBadPostureNotification = useCallback(() => {
+    if (!("Notification" in window)) {
+      console.warn("This browser does not support notifications");
+      return;
+    }
+
+    if (notificationPermission !== "granted") {
+      console.warn("Notification permission not granted");
+      return;
+    }
+
+    const lastNotification = localStorage.getItem("lastPostureNotification");
+    const now = Date.now();
+
+    if (lastNotification && now - parseInt(lastNotification) < 30000) {
+      return;
+    }
+
+    const notification = new Notification("SIT UP STRAIGHT !", {
+      body: "You've had bad posture for more than 10 seconds. Please adjust your position!",
+      icon: "/favicon.ico",
+      tag: "posture-alert",
+      requireInteraction: true,
+    });
+
+    notification.onclick = () => {
+      window.focus();
+      notification.close();
+    };
+    localStorage.setItem("lastPostureNotification", now.toString());
+  }, [notificationPermission]);
+
+  const requestNotificationPermission = useCallback(() => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support notifications");
+      return;
+    }
+
+    Notification.requestPermission().then((permission) => {
+      setNotificationPermission(permission);
+      if (permission !== "granted") {
+        alert("Please enable notifications for the best experience!");
+      }
+    });
+  }, []);
 
   const onResults = useCallback(
     (results: Results) => {
@@ -52,23 +119,41 @@ const LiveWebFeed = () => {
         canvasElement.width,
         canvasElement.height
       );
-
-      if (results.poseLandmarks) {
-        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {
-          color: "#00FF00",
-          lineWidth: 4,
-        });
-        drawLandmarks(canvasCtx, results.poseLandmarks, {
-          color: "#FF0000",
-          lineWidth: 2,
-        });
-      }
+      // uncomment for landmarks ;D
+      // if (results.poseLandmarks) {
+      //   drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {
+      //     color: "#00FF00",
+      //     lineWidth: 4,
+      //   });
+      //   drawLandmarks(canvasCtx, results.poseLandmarks, {
+      //     color: "#FF0000",
+      //     lineWidth: 2,
+      //   });
+      // }
 
       canvasCtx.restore();
 
       if (results.poseLandmarks) {
         const feedback = getPostureFeedback(results.poseLandmarks);
-        console.log(feedback);
+        const hasBadPosture =
+          feedback !== "Great posture! Maintaining your calibrated position!";
+
+        if (hasBadPosture && !isBadPosture) {
+          setIsBadPosture(true);
+          setBadPostureStartTime(Date.now());
+        } else if (!hasBadPosture && isBadPosture) {
+          setIsBadPosture(false);
+          setBadPostureStartTime(null);
+        }
+
+        if (
+          hasBadPosture &&
+          badPostureStartTime &&
+          Date.now() - badPostureStartTime > postureTimer
+        ) {
+          showBadPostureNotification();
+          setBadPostureStartTime(Date.now());
+        }
 
         canvasCtx.save();
         canvasCtx.scale(-1, 1);
@@ -78,34 +163,56 @@ const LiveWebFeed = () => {
 
         if (isCalibrating) {
           canvasCtx.fillStyle = "#FFFF00";
-          canvasCtx.fillText("Calibrating... Hold your good posture!", 10, 30);
+          canvasCtx.fillText("Calibrating... please hold", 10, 30);
         } else if (!goodPosture) {
           canvasCtx.fillStyle = "#FFA500";
-          canvasCtx.fillText(
-            "Click 'Calibrate Posture' to set your baseline",
-            10,
-            30
-          );
+          canvasCtx.fillText("Calibrate your posture for base", 10, 30);
         } else {
-          canvasCtx.fillStyle = "#FFFFFF";
-          canvasCtx.fillText(feedback, 10, 30);
+          if (hasBadPosture) {
+            canvasCtx.fillStyle = "#FF6B6B";
+            if (badPostureStartTime) {
+              const timeElapsed = Date.now() - badPostureStartTime;
+              const timeLeft = Math.max(
+                0,
+                Math.ceil((postureTimer - timeElapsed) / 1000)
+              );
+              if (timeLeft > 0) {
+                canvasCtx.fillText(`${feedback}`, 10, 30);
+                canvasCtx.fillText(`(Please sit up straight or you may be alerted!)`, 10, 50);
+              } else {
+                canvasCtx.fillText(`${feedback} (ALERT ACTIVE!)`, 10, 30);
+              }
+            } else {
+              canvasCtx.fillText(feedback, 10, 30);
+            }
+          } else {
+            canvasCtx.fillStyle = "#51CF66";
+            canvasCtx.fillText(feedback, 10, 30);
+          }
         }
-
         canvasCtx.restore();
       }
     },
-    [goodPosture, isCalibrating]
+    [
+      goodPosture,
+      isCalibrating,
+      isBadPosture,
+      badPostureStartTime,
+      showBadPostureNotification,
+      notificationPermission,
+    ]
   );
 
   const calibratePosture = useCallback(() => {
     if (!webcamRef.current?.video) return;
 
     setIsCalibrating(true);
+    setIsBadPosture(false);
+    setBadPostureStartTime(null);
 
     setTimeout(() => {
       const video = webcamRef.current?.video;
       if (!video) return;
-
       const tempPose = new Pose({
         locateFile: (file: string) =>
           `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
@@ -202,12 +309,10 @@ const LiveWebFeed = () => {
           await pose.send({ image: webcamRef.current.video });
         }
       },
-      width: window.innerWidth / 2,
-      height: window.innerHeight / 2,
+      width: 1380,
+      height: 960,
     });
-
     camera.start();
-
     return () => {
       camera.stop();
       pose.close();
@@ -215,48 +320,61 @@ const LiveWebFeed = () => {
   }, [onResults]);
 
   return (
-    <Box position="relative" width="640px" height="480px">
-      <Webcam
-        ref={webcamRef}
-        style={{
-          display: "none",
-        }}
-        width={640}
-        height={480}
-      />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          transform: "scaleX(-1)",
-        }}
-      />
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      width="100%"
+      flexDirection="column"
+    >
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        margin="1.5rem"
+        width="100%"
+      >
+        <Webcam
+          ref={webcamRef}
+          style={{
+            display: "none",
+            borderRadius: "1rem",
+          }}
+          width={1380}
+          height={960}
+        />
+        <canvas
+          ref={canvasRef}
+          style={{
+            transform: "scaleX(-1)",
+            maxWidth: "100%",
+            height: "auto",
+            borderRadius: "1rem"
+          }}
+        />
+      </Box>
       <Button
-        position="absolute"
-        bottom="20px"
-        left="50%"
-        transform="translateX(-50%)"
         colorScheme={goodPosture ? "green" : "blue"}
         onClick={calibratePosture}
         isLoading={isCalibrating}
         loadingText="Calibrating..."
+        zIndex={10}
       >
         {goodPosture ? "Recalibrate Posture" : "Calibrate Posture"}
       </Button>
-      {goodPosture && !isCalibrating && (
-        <Box
-          position="absolute"
-          top="10px"
-          right="10px"
-          backgroundColor="green.500"
-          color="white"
-          padding="8px 12px"
-          borderRadius="md"
-          fontSize="14px"
+      {notificationPermission !== "granted" && (
+        <Button
+          colorScheme="orange"
+          onClick={requestNotificationPermission}
+          mt={2}
+          size="sm"
         >
-          Calibrated.
+          Enable Notifications
+        </Button>
+      )}
+      {goodPosture && !isCalibrating && (
+        <Box mt={2} color="white" padding="8px 12px" fontSize="14px">
+          Calibrated :D
         </Box>
       )}
     </Box>

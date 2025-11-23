@@ -1,14 +1,19 @@
-import { HStack, Link } from "@chakra-ui/react";
+import { HStack, Box, Link } from "@chakra-ui/react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
 const Header = () => {
   return (
-    <HStack>
-      <Link href="/home">Home</Link>
-      <Link href="/video">Video</Link>
+    <Box>
+      <HStack m="1rem">
+        <Link href="/home">Home</Link>
+        <Link href="/videos">Video</Link>
+        <Link href="/camera">Camera</Link>
+        <Link href="/stretch">Stretch</Link>
+        <Link href="/chat">Chatter</Link> {/* TEMPORARY */}
+      </HStack>
       <Outlet />
-    </HStack>
+    </Box>
   );
 };
 

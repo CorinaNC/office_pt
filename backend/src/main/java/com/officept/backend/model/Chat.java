@@ -1,5 +1,6 @@
 package com.officept.backend.model;
 
+import com.officept.backend.record.ChatType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +36,9 @@ public class Chat {
     @DocumentReference(lazy = true)
     private User user;
 
-    @Field("message")
-    private String message;
+    @Field("type")
+    ChatType type;
+
+    @Field("text")
+    private String text;
 }

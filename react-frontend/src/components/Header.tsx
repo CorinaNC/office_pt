@@ -11,6 +11,7 @@ const Header = () => {
         <Link href="/camera">Camera</Link>
         <Link href="/stretch">Stretch</Link>
         <Link href="/chat">Chatter</Link> {/* TEMPORARY */}
+        <Link href="/diagram">Diagram</Link>
       </HStack>
       <Outlet />
     </Box>

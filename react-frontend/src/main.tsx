@@ -7,10 +7,11 @@ import Header from "./components/Header.tsx";
 import theme from "./components/theme.ts";
 import Home from "./pages/Home.tsx";
 import Videos from "./pages/Videos.tsx";
-import Camera from "./pages/Camera.tsx";
 import Stretch from "./pages/Stretch.tsx";
 import Chat from "./pages/Chat.tsx";
-
+import LiveWebFeed from "./pages/LiveWebFeed.js";
+import Survey from "./pages/Survey.tsx";
+import Diagram from "./pages/Diagram.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
@@ -20,9 +21,11 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/videos" element={<Videos />} />
-            <Route path="/camera" element={<Camera />} />
+            <Route path="/camera" element={<LiveWebFeed />} />
             <Route path="/stretch" element={<Stretch />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/survey" element={<Survey />} />
+            <Route path="/diagram" element={<Diagram />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -2,7 +2,10 @@ package com.officept.backend;
 
 import com.officept.backend.dto.ChatInputDTO;
 import com.officept.backend.dto.ChatOutputDTO;
+import com.officept.backend.repository.ChatRepository;
+import com.officept.backend.repository.ConversationRepository;
 import com.officept.backend.service.ChatService;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +26,16 @@ public class FlaskAPITest {
 
     @Autowired
     private ChatService chatService;
+    @Autowired
+    private ChatRepository chatRepository;
+    @Autowired
+    private ConversationRepository conversationRepository;
+
+    @Before
+    public void setup() {
+        chatRepository.deleteAll();
+        conversationRepository.deleteAll();
+    }
 
     @Test
     @Ignore  // Only run when python server is on
@@ -30,7 +43,7 @@ public class FlaskAPITest {
         ChatInputDTO input = ChatInputDTO.builder()
                 .withConversationId(null)
                 .withUser(null)
-                .withUserMessage("What are some reason why my wrist hurt?")
+                .withUserMessage("Why am I tired?")
                 .build();
 
         ChatOutputDTO output = chatService.processMessage(input);

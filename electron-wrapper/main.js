@@ -1,10 +1,4 @@
-const {
-  app,
-  BrowserWindow,
-  systemPreferences,
-  ipcMain,
-  dialog,
-} = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
 let mainWindow = null;
@@ -14,11 +8,14 @@ const mainBrowser = () => {
     width: 800,
     height: 600,
     title: "OfficePT",
-
+    icon: path.join(__dirname, "assets/logo.png"),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   });
 
   mainWindow.webContents.openDevTools();
-
   mainWindow.loadURL("http://localhost:5173");
 };
 
